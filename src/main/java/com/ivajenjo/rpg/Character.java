@@ -47,6 +47,9 @@ public class Character {
                 health = MAX_HEALTH;
             }
         }
+    }
 
+    public int getRange(){
+        return 1;
     }
 }

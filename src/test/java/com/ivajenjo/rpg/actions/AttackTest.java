@@ -1,6 +1,7 @@
 package com.ivajenjo.rpg.actions;
 
 import com.ivajenjo.rpg.Character;
+import com.ivajenjo.rpg.RangedCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class AttackTest {
 
     @Test
     void character_attacks_target_with_damage() {
-        Character target = new Character();
+        Character target = new Character(1000,10);
         attack.attack(target, 100);
         assertThat(target.getHealth()).isEqualTo(900);
     }
@@ -40,5 +41,12 @@ public class AttackTest {
         Character target = new Character(Character.MAX_HEALTH, 5);
         attack.attack(target, 100);
         assertThat(target.getHealth()).isEqualTo(800);
+    }
+
+    @Test
+    void character_cannot_attack_target_with_higher_range(){
+        Character target = new RangedCharacter(1000, 10);
+        attack.attack(target, 100);
+        assertThat(target.getHealth()).isEqualTo(1000);
     }
 }

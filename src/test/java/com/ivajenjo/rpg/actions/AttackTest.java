@@ -1,9 +1,12 @@
 package com.ivajenjo.rpg.actions;
 
+import com.ivajenjo.rpg.*;
 import com.ivajenjo.rpg.Character;
-import com.ivajenjo.rpg.RangedCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -49,4 +52,35 @@ public class AttackTest {
         attack.attack(target, 100);
         assertThat(target.getHealth()).isEqualTo(1000);
     }
+
+    @Test
+    void character_can_not_attack_allied_target(){
+        Character target = new Character(1000, 10);
+        Faction mercadoners = new Faction();
+        mercadoners.addCharacter(attack.getAttacker());
+        mercadoners.addCharacter(target);
+        Set<Faction> factions = new HashSet<>();
+        factions.add(mercadoners);
+        AttackController attackController = new AttackController(factions);
+        attack.setAttackController(attackController);
+        attack.attack(target, 100);
+        assertThat(target.getHealth()).isEqualTo(1000);
+    }
+
+    @Test
+    void character_can_attack_enemy_faction_target(){
+        Character target = new Character(1000, 10);
+        Faction mercadoners = new Faction();
+        mercadoners.addCharacter(attack.getAttacker());
+        Faction providers = new Faction();
+        providers.addCharacter(target);
+        Set<Faction> factions = new HashSet<>();
+        factions.add(mercadoners);
+        factions.add(providers);
+        AttackController attackController = new AttackController(factions);
+        attack.setAttackController(attackController);
+        attack.attack(target, 100);
+        assertThat(target.getHealth()).isEqualTo(900);
+    }
+
 }

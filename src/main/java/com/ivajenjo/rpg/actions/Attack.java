@@ -9,7 +9,19 @@ public class Attack {
         this.attacker = attacker;
     }
 
+    public Character getAttacker() {
+        return attacker;
+    }
+
     public void attack(Character target, int damage) {
-        target.receiveDamage(damage);
+        if (!attacker.equals(target)) {
+            if (attacker.getLevel() >= target.getLevel() + 5) {
+                target.receiveDamage(damage * 2);
+            } else if (attacker.getLevel() <= target.getLevel() - 5) {
+                target.receiveDamage(damage / 2);
+            } else {
+                target.receiveDamage(damage);
+            }
+        }
     }
 }

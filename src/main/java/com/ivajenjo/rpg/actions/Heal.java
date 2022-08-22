@@ -10,7 +10,13 @@ public class Heal {
         this.healer = healer;
     }
 
+    public Character getHealer() {
+        return healer;
+    }
+
     public void heal(Character target, int healing) {
-        target.heal(healing);
+        if (healer.equals(target)) {
+            target.heal(healing);
+        }
     }
 }

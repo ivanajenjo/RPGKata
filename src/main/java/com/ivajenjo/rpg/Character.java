@@ -6,14 +6,19 @@ public class Character {
     private int health;
     private int level;
 
-    public Character(int health, int level) {
+    public Character(int health) {
         this.health = health;
-        this.level = level;
+        this.level = 1;
     }
 
     public Character() {
         this.health = MAX_HEALTH;
         this.level = 1;
+    }
+
+    public Character(int health, int level) {
+        this.health = health;
+        this.level = level;
     }
 
     public int getHealth() {

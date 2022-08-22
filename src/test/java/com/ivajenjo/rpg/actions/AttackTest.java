@@ -12,7 +12,7 @@ public class AttackTest {
 
     @BeforeEach
     void setUp() {
-        attack = new Attack(new Character());
+        attack = new Attack(new Character(1000, 10));
     }
 
     @Test
@@ -22,4 +22,23 @@ public class AttackTest {
         assertThat(target.getHealth()).isEqualTo(900);
     }
 
+    @Test
+    void character_attacks_itself_with_damage() {
+        attack.attack(attack.getAttacker(), 100);
+        assertThat(attack.getAttacker().getHealth()).isEqualTo(Character.MAX_HEALTH);
+    }
+
+    @Test
+    void character_attacks_target_5_levels_above_itself_with_dmg_reduced() {
+        Character target = new Character(Character.MAX_HEALTH, 15);
+        attack.attack(target, 100);
+        assertThat(target.getHealth()).isEqualTo(950);
+    }
+
+    @Test
+    void character_attacks_target_5_levels_below_itself_with_dmg_increased() {
+        Character target = new Character(Character.MAX_HEALTH, 5);
+        attack.attack(target, 100);
+        assertThat(target.getHealth()).isEqualTo(800);
+    }
 }

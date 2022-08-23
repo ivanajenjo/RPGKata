@@ -2,6 +2,7 @@ package com.ivajenjo.rpg.actions;
 
 import com.ivajenjo.rpg.AttackController;
 import com.ivajenjo.rpg.Character;
+import com.ivajenjo.rpg.Thing;
 
 import java.util.HashSet;
 
@@ -34,6 +35,10 @@ public class Attack {
     public void attack(Character target, int damage) {
         int computedDamage = computeDamage(attacker, target, damage);
         target.receiveDamage(computedDamage);
+    }
+
+    public void attack(Thing target, int damage) {
+        target.receiveDamage(damage);
     }
 
     public int computeDamage(Character attacker, Character target, int damage) {

@@ -4,7 +4,7 @@ public class Character {
     public static final int MAX_HEALTH = 1000;
 
     private int health;
-    private int level;
+    private final int level;
 
     public Character(int health) {
         this.health = health;
@@ -49,7 +49,7 @@ public class Character {
         }
     }
 
-    public int getRange(){
+    public int getRange() {
         return 1;
     }
 }

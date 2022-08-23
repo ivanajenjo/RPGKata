@@ -9,9 +9,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AttackTest {
 
+    //Difference between assertThat and assertEquals, when to use ...
     Attack attack;
 
     @BeforeEach
@@ -21,7 +23,7 @@ public class AttackTest {
 
     @Test
     void character_attacks_target_with_damage() {
-        Character target = new Character(1000,10);
+        Character target = new Character(1000, 10);
         attack.attack(target, 100);
         assertThat(target.getHealth()).isEqualTo(900);
     }
@@ -47,14 +49,14 @@ public class AttackTest {
     }
 
     @Test
-    void character_cannot_attack_target_with_higher_range(){
+    void character_cannot_attack_target_with_higher_range() {
         Character target = new RangedCharacter(1000, 10);
         attack.attack(target, 100);
         assertThat(target.getHealth()).isEqualTo(1000);
     }
 
     @Test
-    void character_can_not_attack_allied_target(){
+    void character_can_not_attack_allied_target() {
         Character target = new Character(1000, 10);
         Faction mercadoners = new Faction();
         mercadoners.addCharacter(attack.getAttacker());
@@ -68,7 +70,7 @@ public class AttackTest {
     }
 
     @Test
-    void character_can_attack_enemy_faction_target(){
+    void character_can_attack_enemy_faction_target() {
         Character target = new Character(1000, 10);
         Faction mercadoners = new Faction();
         mercadoners.addCharacter(attack.getAttacker());
@@ -81,6 +83,13 @@ public class AttackTest {
         attack.setAttackController(attackController);
         attack.attack(target, 100);
         assertThat(target.getHealth()).isEqualTo(900);
+    }
+
+    @Test
+    void character_can_attack_thing(){
+        Thing tree = new Tree();
+        attack.attack(tree, 200);
+        assertEquals(tree.getHealth(), 1800);
     }
 
 }

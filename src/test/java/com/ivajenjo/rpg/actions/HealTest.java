@@ -28,13 +28,13 @@ public class HealTest {
     }
 
     @Test
-    void character_only_heals_himself(){
+    void character_only_heals_himself() {
         heal.heal(heal.getHealer(), 100);
         assertThat(heal.getHealer().getHealth()).isEqualTo(1000);
     }
 
     @Test
-    void character_can_heal_allies(){
+    void character_can_heal_allies() {
         Character target = new Character(900);
         Faction mercadoners = new Faction();
         mercadoners.addCharacter(heal.getHealer());
@@ -48,7 +48,7 @@ public class HealTest {
     }
 
     @Test
-    void character_can_not_heal_enemies(){
+    void character_can_not_heal_enemies() {
         Character target = new Character(900);
         Faction mercadoners = new Faction();
         Faction enemies = new Faction();

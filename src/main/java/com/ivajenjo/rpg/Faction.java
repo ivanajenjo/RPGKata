@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Faction {
-    private Set<Character> characters = new HashSet<>();
+    private final Set<Character> characters = new HashSet<>();
 
     public boolean areAllies(Character character, Character otherCharacter2) {
         return characters.contains(character) && characters.contains(otherCharacter2);
